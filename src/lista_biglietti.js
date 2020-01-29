@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from 'antd';
 
 export const ListBiglietti = ({ biglietti, onRemove, onEdit}) => {
   return (
@@ -6,8 +7,8 @@ export const ListBiglietti = ({ biglietti, onRemove, onEdit}) => {
       {biglietti.map(item => (
         <li key={item.id}>
           {item.numbers.join(",")}{" "}
-          <button onClick={() => onRemove(item.id)}>X</button>
-          <button onClick={() => onEdit(item.id)}>edit</button>
+          <Button type="danger" onClick={() => onRemove(item.id)}>X</Button>
+          <Button type="primary" onClick={() => onEdit(item.id)}>edit</Button>
         </li>
       ))}
     </ul>
