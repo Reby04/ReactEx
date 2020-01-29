@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import 'antd/es/date-picker/style/css'; // for css
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import 'antd/dist/antd.css';
 import './index.css';
 import { Button } from 'antd';
 import { Layout } from 'antd';
@@ -9,17 +8,15 @@ import { Menu } from 'antd';
 import { Icon } from 'antd';
 import { Breadcrumb } from 'antd';
 import { Pagination } from 'antd';
-
-
 import { ListBiglietti } from "./lista_biglietti";
+import { Switch, Transfer} from 'antd';
 
 function App() {
   const counter = useRef(2);
   const inputRef = useRef();
   const editId = useRef(0);
-  const { Header, Footer, Sider, Content } = Layout;
+  const { Header, Sider, Content } = Layout;
   const { SubMenu } = Menu;
-
 
   const [list, setList] = useState([
     { id: 1, numbers: [1, 2, 3, 4, 5] },
@@ -70,7 +67,7 @@ function App() {
   const removeBiglietto = id => {
     let newList = [...list];
 
-    const index = newList.findIndex(item => item.id == id);
+    const index = newList.findIndex(item => item.id === id);
 
     if (index > -1) {
       newList.splice(index, 1);
@@ -101,9 +98,26 @@ function App() {
     console.log(object);
     setBool(true);
     editId.current = id;
-    };
+    };  
 
-  
+    const onChange = checked => {
+      console.log(`switch to` + ' ' + checked);
+    }
+
+
+    const mockData = [];
+for (let i = 0; i < 20; i++) {
+  mockData.push({
+    key: i.toString(),
+    title: `content${i + 1}`,
+    description: `description of content${i + 1}`,
+    disabled: i % 3 < 1,
+  });
+}
+  const handleScroll = (direction, e) => {
+  console.log('direction:', direction);
+  console.log('target:', e.target);
+};
 
   return (
     <div className="App">
@@ -139,8 +153,8 @@ function App() {
               </span>
             }
           >
-            <Menu.Item key="1">option1</Menu.Item>
-            <Menu.Item key="2">option2</Menu.Item>
+            <Menu.Item key="1">Login</Menu.Item>
+            <Menu.Item key="2">Registration</Menu.Item>
             <Menu.Item key="3">option3</Menu.Item>
             <Menu.Item key="4">option4</Menu.Item>
           </SubMenu>
@@ -205,7 +219,25 @@ function App() {
         ))}
       </div>
       <button onClick={showCandy}>show</button>
-      <Pagination className="pagination" defaultCurrent={1} total={50} />
+      
+      <div>
+      <br></br>
+        <Switch defaultChecked onChange={onChange}/>
+      </div>
+
+      <br></br>
+      <div>
+      <br></br>
+        <Transfer 
+          dataSource={mockData}
+          titles={['Source', 'Target']}
+          onScroll={handleScroll}
+        />
+      </div>
+      
+      <br></br>
+      <Pagination className='positionPagination' defaultCurrent={1} total={50}></Pagination>
+     
         </Content>
       </Layout>
  
@@ -217,6 +249,6 @@ function App() {
        
     </div>
   );
-}
+        }
 
 export default App;

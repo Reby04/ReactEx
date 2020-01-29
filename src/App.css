@@ -16,11 +16,16 @@
   margin: 16px;
 }
 
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.positionPagination  {
+  position: absolute;
+  left: 202px;
+  top: 198px;
 }
 
 .App-header {
